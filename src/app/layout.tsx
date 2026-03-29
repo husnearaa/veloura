@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import ReduxProvider from "@/redux/ReduxProvider";
+import NextAuthSessionProvider from "@/lib/NextAuthSessionProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,7 +28,9 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Toaster position="bottom-right" richColors />
-        <ReduxProvider>{children}</ReduxProvider>
+       <NextAuthSessionProvider>
+          <ReduxProvider>{children}</ReduxProvider>
+        </NextAuthSessionProvider>
       </body>
     </html>
   );
