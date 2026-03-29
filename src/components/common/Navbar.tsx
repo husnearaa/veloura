@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Handbag, ChevronDown, Menu, X } from "lucide-react";
+import { Handbag, ChevronDown, Menu, X, Globe } from "lucide-react";
 
 interface UserData {
   email: string;
@@ -16,6 +16,7 @@ interface UserData {
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [user, setUser] = useState<UserData | null>(null);
   const router = useRouter();
 
@@ -41,13 +42,26 @@ export default function Navbar() {
     { name: "SHIRT", href: "/shop?categories=shirt", delay: "600ms" },
   ];
 
+  const languages = [
+    { name: "ENGLISH", code: "en", delay: "0ms" },
+    { name: "BENGALI", code: "bn", delay: "100ms" },
+    { name: "ARABIC", code: "ar", delay: "200ms" },
+  ];
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
     if (isShopDropdownOpen) setIsShopDropdownOpen(false);
+    if (isLanguageDropdownOpen) setIsLanguageDropdownOpen(false);
   };
 
   const toggleShopDropdown = () => {
     setIsShopDropdownOpen(!isShopDropdownOpen);
+    if (isLanguageDropdownOpen) setIsLanguageDropdownOpen(false);
+  };
+
+  const toggleLanguageDropdown = () => {
+    setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
+    if (isShopDropdownOpen) setIsShopDropdownOpen(false);
   };
 
   return (
@@ -137,6 +151,40 @@ export default function Navbar() {
               </Link>
             )}
             
+            {/* Language Dropdown - Beside cart icon */}
+            <div className="relative">
+              <button
+                onClick={toggleLanguageDropdown}
+                className="text-gray-800 hover:text-gray-600 transition-colors focus:outline-none"
+              >
+                <Globe className="h-6 w-6" />
+              </button>
+
+              {isLanguageDropdownOpen && (
+                <div
+                  className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition-all duration-300 z-50"
+                  onMouseLeave={() => setIsLanguageDropdownOpen(false)}
+                >
+                  <div className="py-2">
+                    {languages.map((language) => (
+                      <button
+                        key={language.code}
+                        onClick={() => {
+                          // Handle language change here
+                          console.log(`Language changed to: ${language.code}`);
+                          setIsLanguageDropdownOpen(false);
+                        }}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 uppercase"
+                        style={{ animationDelay: language.delay }}
+                      >
+                        {language.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
             <Link href="/cart" className="relative">
               <Handbag className="h-6 w-6 text-gray-800 hover:text-gray-600 transition-colors" />
             </Link>
@@ -208,6 +256,46 @@ export default function Navbar() {
                     >
                       {category.name.toLowerCase()}
                     </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Language Section */}
+            <div>
+              <button
+                onClick={toggleLanguageDropdown}
+                className="text-gray-800 hover:text-gray-600 w-full flex items-center justify-between px-3 py-2 text-base font-medium tracking-wide transition-colors duration-200 uppercase"
+              >
+                <div className="flex items-center gap-2">
+                  <Globe className="h-5 w-5" />
+                  LANGUAGE
+                </div>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform duration-300 ${
+                    isLanguageDropdownOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              
+              <div
+                className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                  isLanguageDropdownOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                <div className="pl-6 space-y-1 mt-1">
+                  {languages.map((language) => (
+                    <button
+                      key={language.code}
+                      onClick={() => {
+                        console.log(`Language changed to: ${language.code}`);
+                        toggleMobileMenu();
+                        toggleLanguageDropdown();
+                      }}
+                      className="text-gray-600 hover:text-gray-900 block w-full text-left px-3 py-2 text-sm transition-colors duration-200 uppercase"
+                    >
+                      {language.name}
+                    </button>
                   ))}
                 </div>
               </div>
