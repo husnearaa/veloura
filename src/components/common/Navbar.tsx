@@ -4,10 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import {
-  ChevronDown,
-  Globe,
-} from "lucide-react";
+import { Handbag, ChevronDown, Menu, X } from "lucide-react";
 
 interface UserData {
   email: string;
@@ -18,10 +15,9 @@ interface UserData {
 }
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
   const [user, setUser] = useState<UserData | null>(null);
-  const [language, setLanguage] = useState<"en" | "bn">("en");
-
   const router = useRouter();
 
   // Load user
@@ -36,142 +32,236 @@ export default function Navbar() {
     router.push("/login");
   };
 
-  const navLinks = [
-    { name: "HOME", href: "/" },
-    { name: "SHOP", href: "/shop" },
+  const shopCategories = [
+    { name: "ONE PIECE", href: "/shop?categories=one-piece", delay: "0ms" },
+    { name: "TWO PIECE", href: "/shop?categories=two-piece", delay: "100ms" },
+    { name: "THREE PIECE", href: "/shop?categories=three-piece", delay: "200ms" },
+    { name: "KAFTAN", href: "/shop?categories=kaftan", delay: "300ms" },
+    { name: "MIDI DRESS", href: "/shop?categories=midi-dress", delay: "400ms" },
+    { name: "PANT", href: "/shop?categories=pant", delay: "500ms" },
+    { name: "SHIRT", href: "/shop?categories=shirt", delay: "600ms" },
   ];
 
-  const shopItems = [
-    "ONE PIECE",
-    "TWO PIECE",
-    "THREE PIECE",
-    "KAFTAN",
-    "MIDI DRESS",
-    "PANT",
-    "SHIRT",
-  ];
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    if (isShopDropdownOpen) setIsShopDropdownOpen(false);
+  };
+
+  const toggleShopDropdown = () => {
+    setIsShopDropdownOpen(!isShopDropdownOpen);
+  };
 
   return (
-    <>
-      <nav className="fixed top-0 left-0 w-full bg-white border-b z-50">
-        <div className="container mx-auto flex items-center justify-between h-16 px-4">
-          
+    <nav className="bg-white py-4 border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
           {/* LOGO */}
-          <Link href="/">
-            <Image
-              src="/greetely.png"
+          <Link href="/" className="flex-shrink-0">
+            {/* <Image
+              src="https://server.vlada.store/assets/logos/logo-colored.png"
               alt="Logo"
               width={120}
               height={40}
-              className="object-contain"
-            />
+              className="w-[100px] h-auto"
+              priority
+            /> */}
+            <h1 className="text-xl font-bold uppercase text-gray-800 hover:text-gray-600 transition-colors">Veloura</h1>
           </Link>
 
-          {/* DESKTOP NAV */}
-          <div className="hidden md:flex items-center gap-8">
-            
-            {/* Home */}
+          {/* DESKTOP NAVIGATION */}
+          <div className="hidden md:flex md:items-center md:space-x-8">
             <Link
               href="/"
-              className="text-sm font-medium text-gray-600 hover:text-black"
+              className="text-gray-800 hover:text-gray-600 px-3 py-2 text-sm font-medium tracking-wide transition-colors duration-200 uppercase"
             >
               HOME
             </Link>
 
-            {/* SHOP DROPDOWN */}
+            {/* Shop Dropdown */}
             <div className="relative group">
-              <button className="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-black">
+              <button
+                className="text-gray-800 hover:text-gray-600 px-3 py-2 text-sm font-medium tracking-wide transition-colors duration-200 uppercase flex items-center gap-1"
+                onMouseEnter={() => setIsShopDropdownOpen(true)}
+                onMouseLeave={() => setIsShopDropdownOpen(false)}
+              >
                 SHOP
-                <ChevronDown size={16} className="group-hover:rotate-180 transition" />
+                <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
               </button>
 
-              {/* Dropdown */}
-              <div className="absolute left-0 top-full mt-3 w-52 bg-white border rounded-md shadow-xl opacity-0 invisible group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 translate-y-2 transition-all duration-300">
-                {shopItems.map((item, i) => (
-                  <Link
-                    key={i}
-                    href={`/shop/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    {item}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* LANGUAGE */}
-            <div className="relative group">
-              <button className="flex items-center gap-1 text-sm text-gray-600 hover:text-black">
-                <Globe size={18} />
-                {language.toUpperCase()}
-                <ChevronDown size={16} />
-              </button>
-
-              <div className="absolute right-0 top-full mt-3 w-32 bg-white border rounded-md shadow-xl opacity-0 invisible group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 translate-y-2 transition-all duration-300">
-                <button
-                  onClick={() => setLanguage("en")}
-                  className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
-                >
-                  English
-                </button>
-                <button
-                  onClick={() => setLanguage("bn")}
-                  className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
-                >
-                  বাংলা
-                </button>
+              <div
+                className="absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50"
+                onMouseEnter={() => setIsShopDropdownOpen(true)}
+                onMouseLeave={() => setIsShopDropdownOpen(false)}
+              >
+                <div className="py-2">
+                  {shopCategories.map((category) => (
+                    <Link
+                      key={category.name}
+                      href={category.href}
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 uppercase"
+                      style={{ animationDelay: category.delay }}
+                    >
+                      {category.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* RIGHT SIDE */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* RIGHT SECTION - Desktop */}
+          <div className="hidden md:flex items-center space-x-6">
             {user ? (
-              <div className="relative">
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-gray-600">Hi, {user.name}</span>
+                {user.role === "admin" && (
+                  <Link
+                    href="/admin/dashboard"
+                    className="text-gray-800 hover:text-gray-600 transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                )}
                 <button
                   onClick={handleLogout}
-                  className="text-sm bg-black text-white px-4 py-2 rounded-md"
+                  className="text-sm text-gray-800 hover:text-gray-600 transition-colors"
                 >
-                  {user.name}
+                  Logout
                 </button>
               </div>
             ) : (
               <Link
                 href="/login"
-                className="text-sm text-orange-500 font-semibold"
+                className="text-sm text-gray-800 hover:text-gray-600 transition-colors"
               >
-                LOGIN
+                Login
               </Link>
             )}
+            
+            <Link href="/cart" className="relative">
+              <Handbag className="h-6 w-6 text-gray-800 hover:text-gray-600 transition-colors" />
+            </Link>
           </div>
 
-          {/* MOBILE BUTTON */}
-          <button
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            ☰
-          </button>
-        </div>
-      </nav>
-
-      {/* MOBILE MENU */}
-      {isMenuOpen && (
-        <div className="fixed top-16 left-0 w-full bg-white border-t z-40 md:hidden">
-          {navLinks.map((link, i) => (
-            <Link
-              key={i}
-              href={link.href}
-              onClick={() => setIsMenuOpen(false)}
-              className="block px-6 py-4 border-b text-sm"
-            >
-              {link.name}
+          {/* MOBILE MENU BUTTONS */}
+          <div className="md:hidden flex items-center space-x-4">
+            <Link href="/cart" className="relative">
+              <Handbag className="h-6 w-6 text-gray-800" />
             </Link>
-          ))}
+            <button
+              onClick={toggleMobileMenu}
+              className="text-gray-800 focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
         </div>
-      )}
 
-      <div className="h-16" />
-    </>
+        {/* MOBILE MENU */}
+        <div
+          className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+            isMobileMenuOpen ? "max-h-screen opacity-100 mt-4" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="px-2 space-y-1 border-t border-gray-100 pt-4">
+            <Link
+              href="/"
+              className="text-gray-800 hover:text-gray-600 block px-3 py-2 text-base font-medium tracking-wide transition-colors duration-200 uppercase"
+              onClick={toggleMobileMenu}
+            >
+              HOME
+            </Link>
+
+            {/* Mobile Shop Accordion */}
+            <div>
+              <button
+                onClick={toggleShopDropdown}
+                className="text-gray-800 hover:text-gray-600 w-full flex items-center justify-between px-3 py-2 text-base font-medium tracking-wide transition-colors duration-200 uppercase"
+              >
+                SHOP
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform duration-300 ${
+                    isShopDropdownOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              
+              <div
+                className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                  isShopDropdownOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                <div className="pl-6 space-y-1 mt-1">
+                  {shopCategories.map((category) => (
+                    <Link
+                      key={category.name}
+                      href={category.href}
+                      className="text-gray-600 hover:text-gray-900 block px-3 py-2 text-sm transition-colors duration-200 capitalize"
+                      onClick={() => {
+                        toggleMobileMenu();
+                        toggleShopDropdown();
+                      }}
+                    >
+                      {category.name.toLowerCase()}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Auth Section */}
+            {user ? (
+              <div className="space-y-2 pt-2">
+                <div className="px-3 py-2 text-sm text-gray-600">
+                  Signed in as {user.name}
+                </div>
+                {user.role === "admin" && (
+                  <Link
+                    href="/admin/dashboard"
+                    className="text-gray-800 hover:text-gray-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
+                    onClick={toggleMobileMenu}
+                  >
+                    Dashboard
+                  </Link>
+                )}
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    toggleMobileMenu();
+                  }}
+                  className="text-gray-800 hover:text-gray-600 block w-full text-left px-3 py-2 text-base font-medium transition-colors duration-200"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="text-gray-800 hover:text-gray-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
+                onClick={toggleMobileMenu}
+              >
+                Login
+              </Link>
+            )}
+
+            {/* Mobile CTA Button */}
+            <div className="pt-4 pb-2">
+              <Link
+                href="/shop"
+                className="w-full block text-center bg-black text-white px-6 py-3 text-sm font-medium tracking-wide hover:bg-gray-800 transition-colors duration-200 rounded-sm"
+                onClick={toggleMobileMenu}
+              >
+                ORDER NOW
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 }
