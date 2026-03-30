@@ -59,11 +59,9 @@ const HeroSection = () => {
 
   return (
     <section className="relative w-full h-[60vh] md:h-[95vh] overflow-hidden">
-      
       {/* SWIPER */}
       <div ref={swiperRef} className="swiper h-full w-full">
         <div className="swiper-wrapper">
-
           {/* SLIDE 1 */}
           <div className="swiper-slide relative h-full w-full">
             <Image
@@ -81,7 +79,7 @@ const HeroSection = () => {
 
               <Link
                 href="/shop"
-                className="bg-black/40 border border-white/40 text-white backdrop-blur-md px-6 py-2 rounded-full w-fit"
+                className="bg-black hover:bg-gray-800 border border-white/60 text-white backdrop-blur-md px-8 py-3 rounded-full w-fit"
               >
                 Explore
               </Link>
@@ -94,12 +92,7 @@ const HeroSection = () => {
 
           {/* SLIDE 2 */}
           <div className="swiper-slide relative h-full w-full">
-            <Image
-              src={Banner2}
-              alt="VELOURA"
-              fill
-              className="object-cover"
-            />
+            <Image src={Banner2} alt="VELOURA" fill className="object-cover" />
 
             <div className="absolute z-10 h-full w-full flex flex-col justify-center px-6 md:px-16">
               <h1 className="text-white text-3xl md:text-7xl mb-6">
@@ -108,23 +101,21 @@ const HeroSection = () => {
 
               <Link
                 href="/shop"
-                className="bg-black/40 border border-white/40 text-white backdrop-blur-md px-6 py-2 rounded-full w-fit"
+                className="bg-black hover:bg-gray-800 border border-white/100 text-white backdrop-blur-md px-8 py-3 rounded-full w-fit"
               >
                 Explore
               </Link>
             </div>
 
-            {/* <h1 className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/90 text-[80px] md:text-[200px] tracking-widest pointer-events-none">
+            <h1 className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/90 text-[80px] md:text-[200px] tracking-widest pointer-events-none">
               VELOURA
-            </h1> */}
+            </h1>
           </div>
-
         </div>
       </div>
 
       {/* CONTROLS */}
       <div className="absolute bottom-6 md:bottom-28 left-6 md:left-45 right-6 md:right-45 z-20 flex justify-between items-center">
-
         {/* COUNTER */}
         <div className="text-white lg:text-2xl text-xl hidden sm:block">
           {String(current).padStart(2, "0")} / {String(total).padStart(2, "0")}
@@ -132,7 +123,6 @@ const HeroSection = () => {
 
         {/* ARROWS */}
         <div className="flex gap-8 items-center">
-
           {/* LEFT ARROW */}
           <button className="hero-prev cursor-pointer p-2">
             <svg
@@ -166,10 +156,8 @@ const HeroSection = () => {
               />
             </svg>
           </button>
-
         </div>
       </div>
-
     </section>
   );
 };
