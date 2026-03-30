@@ -1,5 +1,6 @@
 import AboutVeloura from "@/components/home/AboutVeloura";
 import HeroSection from "@/components/home/HeroSection";
+import TopSellingProduct from "@/components/home/TopSellingProduct";
 
 
 const HomePage = () => {
@@ -7,6 +8,7 @@ const HomePage = () => {
     <div>
       <HeroSection />
       <AboutVeloura />
+      <TopSellingProduct />
     </div>
   );
 };
