@@ -65,7 +65,7 @@ const HeroSection = () => {
           {/* SLIDE 1 */}
           <div className="swiper-slide relative h-full w-full">
             <Image
-              src={Banner1}
+              src={Banner2}
               alt="VELOURA"
               fill
               priority
@@ -92,7 +92,13 @@ const HeroSection = () => {
 
           {/* SLIDE 2 */}
           <div className="swiper-slide relative h-full w-full">
-            <Image src={Banner2} alt="VELOURA" fill className="object-cover" />
+            <Image
+              src={Banner1}
+              alt="VELOURA"
+              fill
+              priority
+              className="object-cover"
+            />
 
             <div className="absolute z-10 h-full w-full flex flex-col justify-center px-6 md:px-16">
               <h1 className="text-white text-3xl md:text-7xl mb-6">

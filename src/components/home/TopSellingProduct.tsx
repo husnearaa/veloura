@@ -139,8 +139,8 @@ const TopSellingProduct = () => {
                           <Image
                             src={product.image}
                             alt="product"
-                            width={350}
-                            height={300}
+                            width={800}
+                            height={800}
                             className={`w-full h-[340px] object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-110 ${
                               !product.stock && "opacity-60"
                             }`}
