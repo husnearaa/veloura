@@ -155,7 +155,7 @@ export default function Navbar() {
             <div className="relative">
               <button
                 onClick={toggleLanguageDropdown}
-                className="text-gray-800 hover:text-gray-600 transition-colors focus:outline-none"
+                className="text-gray-800 hover:text-gray-600 transition-colors focus:outline-none mt-2"
               >
                 <Globe className="h-6 w-6" />
               </button>
@@ -192,6 +192,39 @@ export default function Navbar() {
 
           {/* MOBILE MENU BUTTONS */}
           <div className="md:hidden flex items-center space-x-4">
+            {/* Language icon for mobile */}
+            <div className="relative">
+              <button
+                onClick={toggleLanguageDropdown}
+                className="text-gray-800 hover:text-gray-600 transition-colors focus:outline-none mt-2"
+                aria-label="Language selector"
+              >
+                <Globe className="h-6 w-6" />
+              </button>
+              {isLanguageDropdownOpen && (
+                <div
+                  className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition-all duration-300 z-50"
+                  onMouseLeave={() => setIsLanguageDropdownOpen(false)}
+                >
+                  <div className="py-2">
+                    {languages.map((language) => (
+                      <button
+                        key={language.code}
+                        onClick={() => {
+                          // Handle language change here
+                          console.log(`Language changed to: ${language.code}`);
+                          setIsLanguageDropdownOpen(false);
+                        }}
+                        className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200 uppercase"
+                        style={{ animationDelay: language.delay }}
+                      >
+                        {language.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
             <Link href="/cart" className="relative">
               <Handbag className="h-6 w-6 text-gray-800" />
             </Link>
@@ -261,47 +294,8 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Mobile Language Section */}
-            <div>
-              <button
-                onClick={toggleLanguageDropdown}
-                className="text-gray-800 hover:text-gray-600 w-full flex items-center justify-between px-3 py-2 text-base font-medium tracking-wide transition-colors duration-200 uppercase"
-              >
-                <div className="flex items-center gap-2">
-                  <Globe className="h-5 w-5" />
-                  LANGUAGE
-                </div>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform duration-300 ${
-                    isLanguageDropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-              
-              <div
-                className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                  isLanguageDropdownOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                }`}
-              >
-                <div className="pl-6 space-y-1 mt-1">
-                  {languages.map((language) => (
-                    <button
-                      key={language.code}
-                      onClick={() => {
-                        console.log(`Language changed to: ${language.code}`);
-                        toggleMobileMenu();
-                        toggleLanguageDropdown();
-                      }}
-                      className="text-gray-600 hover:text-gray-900 block w-full text-left px-3 py-2 text-sm transition-colors duration-200 uppercase"
-                    >
-                      {language.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile Auth Section */}
+            {/* Mobile Language Section - Removed from here */}
+            {/* Auth Section - Only login/logout now */}
             {user ? (
               <div className="space-y-2 pt-2">
                 <div className="px-3 py-2 text-sm text-gray-600">
