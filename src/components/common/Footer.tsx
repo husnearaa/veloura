@@ -13,12 +13,36 @@ const Footer = () => {
   const swiperRef = useRef<SwiperType | null>(null);
 
   const faqItems = [
-    { icon: "house", question: "How much time is needed for delivery?", answer: "7 - 10 days." },
-    { icon: "smile", question: "Do I need to pay any advance amount?", answer: "No." },
-    { icon: "shield", question: "Can I place any urgent order?", answer: "Yes." },
-    { icon: "star", question: "Can I place any custom size / changes?", answer: "Yes." },
-    { icon: "truck", question: "Is there an extra cost for customization?", answer: "Depends on your requirement." },
-    { icon: "clock", question: "Can I talk directly with your designers?", answer: "Yes." },
+    {
+      icon: "house",
+      question: "How much time is needed for delivery?",
+      answer: "7 - 10 days.",
+    },
+    {
+      icon: "smile",
+      question: "Do I need to pay any advance amount?",
+      answer: "No.",
+    },
+    {
+      icon: "shield",
+      question: "Can I place any urgent order?",
+      answer: "Yes.",
+    },
+    {
+      icon: "star",
+      question: "Can I place any custom size / changes?",
+      answer: "Yes.",
+    },
+    {
+      icon: "truck",
+      question: "Is there an extra cost for customization?",
+      answer: "Depends on your requirement.",
+    },
+    {
+      icon: "clock",
+      question: "Can I talk directly with your designers?",
+      answer: "Yes.",
+    },
   ];
 
   return (
@@ -26,7 +50,9 @@ const Footer = () => {
       {/* Part 1: FAQ Carousel */}
       <div className="py-[110px] px-6 md:px-[60px] relative">
         <div className="flex items-center justify-between mb-12">
-          <h1 className="text-xl md:text-4xl font-light font-inter">Frequently asked question</h1>
+          <h1 className="text-xl md:text-4xl font-light font-inter">
+            Frequently asked question
+          </h1>
           {/* Navigation Buttons next to title */}
           <div className="flex gap-3">
             <button
@@ -39,7 +65,12 @@ const Footer = () => {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
             <button
@@ -52,7 +83,12 @@ const Footer = () => {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           </div>
@@ -124,7 +160,9 @@ const Footer = () => {
                   </svg>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-medium mb-3 text-white">{item.question}</h3>
+                  <h3 className="text-xl font-medium mb-3 text-white">
+                    {item.question}
+                  </h3>
                   <p className="text-gray-400 text-sm">{item.answer}</p>
                 </div>
               </div>
@@ -136,14 +174,42 @@ const Footer = () => {
       {/* Part 2: Bottom Footer */}
       <div className="w-full bg-[#1D1D1D]">
         <div className="flex flex-col md:flex-row items-start justify-between gap-[90px] p-6 md:p-[60px]">
-          {/* Logo */}
+          {/* Left: Logo */}
           <div>
-            <h1 className="text-5xl font-medium uppercase text-white hover:text-gray-600 transition-colors">
-              VLEORA
+            <h1 className="text-5xl font-medium uppercase text-white hover:text-white transition-colors">
+              VLADA
             </h1>
           </div>
 
-          {/* Email Subscribe */}
+          {/* Middle: Quick Links */}
+          <div className="flex flex-col space-y-2">
+            <Link
+              href="#"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              About Us
+            </Link>
+            <Link
+              href="#"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Services
+            </Link>
+            <Link
+              href="#"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              FAQ
+            </Link>
+            <Link
+              href="#"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Contact
+            </Link>
+          </div>
+
+          {/* Right: Email Subscribe + Social Icons */}
           <div className="w-full max-w-md space-y-4">
             <div className="flex items-center w-full">
               <input
@@ -159,12 +225,19 @@ const Footer = () => {
               By signing up, I agree with the data protection policy of Cowboy.
             </span>
 
-            {/* Social Icons */}
             <div className="flex items-center gap-4 mt-6">
-              <Link href="https://www.instagram.com/vladafashion" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://www.instagram.com/vladafashion"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Instagram size={24} color="#A3A3A3" strokeWidth={1.5} />
               </Link>
-              <Link href="https://www.facebook.com/profile.php?id=61559933033587" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://www.facebook.com/profile.php?id=61559933033587"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Facebook size={24} color="#A3A3A3" strokeWidth={1.5} />
               </Link>
             </div>
