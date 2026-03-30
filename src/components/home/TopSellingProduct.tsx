@@ -149,8 +149,8 @@ const TopSellingProduct = () => {
 
                         {/* Out of stock */}
                         {!product.stock && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-                            <span className="bg-white text-black px-4 py-2 rounded-lg text-sm font-semibold">
+                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                            <span className="bg-white text-gray-800 px-3 py-1.5 rounded-lg font-semibold text-sm">
                               Out of Stock
                             </span>
                           </div>

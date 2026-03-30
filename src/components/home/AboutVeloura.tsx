@@ -20,7 +20,7 @@ const AboutVeloura = () => {
         </p>{" "}
         <div className="flex justify-center">
           <Link
-            className="border mt-3 border-[#E5E7EB] hover:border-[#7a7b7c] py-3 px-4 rounded-2x1 text-center font-inter text-xs uppercase leading-3 mb-6 tracking-[1px] pt-4 transition-all duration-300"
+            className="border mt-3 border-[#E5E7EB] hover:border-[#7a7b7c] py-3 px-4 rounded-2xl text-center font-inter text-xs uppercase leading-3 mb-6 tracking-[1px] pt-4 transition-all duration-300"
             href="/"
           >
             Explore below
