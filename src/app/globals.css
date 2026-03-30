@@ -156,6 +156,7 @@ button {
 body {
   top: 0 !important;
   position: static !important;
+   overflow-x: hidden;
 }
 
 body .skiptranslate {
@@ -172,6 +173,27 @@ body .skiptranslate {
   position: absolute !important;
   top: 0 !important;
 }
+
+
+
+
+/************** swiper custom styles  ****************************/
+
+/* globals.css */
+.swiper-slide {
+  transition-property: opacity !important;
+}
+
+.swiper-fade .swiper-slide {
+  opacity: 0 !important;
+}
+
+.swiper-fade .swiper-slide-active {
+  opacity: 1 !important;
+  z-index: 2;
+}
+
+/**********
 
 
 
