@@ -177,36 +177,74 @@ const Footer = () => {
           {/* Left: Logo */}
           <div>
             <h1 className="text-5xl font-medium uppercase text-white hover:text-white transition-colors">
-              VLADA
+              VELOURA
             </h1>
           </div>
 
           {/* Middle: Quick Links */}
-          <div className="flex flex-col space-y-2">
-            <Link
-              href="#"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              About Us
-            </Link>
-            <Link
-              href="#"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              Services
-            </Link>
-            <Link
-              href="#"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              FAQ
-            </Link>
-            <Link
-              href="#"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              Contact
-            </Link>
+          <div className="space-y-2 flex flex-col md:flex-row items-center gap-[120px]">
+            <h4 className="font-medium text-[#A3A3A3] text-[17.156px] leading-[26px] font-inter">
+              Explore
+            </h4>
+
+            <ul className="flex flex-col gap-2.5">
+              <li>
+                <Link
+                  className="font-inter text-base leading-[23.55px] font-normal text-white capitalize"
+                  href="/shop?categories-one-piece"
+                >
+                  one piece
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="font-inter text-base leading-[23.55px] font-normal text-white capitalize"
+                  href="/shop?categories-two-piece"
+                >
+                  two piece
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="font-inter text-base leading-[23.55px] font-normal text-white capitalize"
+                  href="/shop?categories-three-piece"
+                >
+                  three piece
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="font-inter text-base leading-[23.55px] font-normal text-white capitalize"
+                  href="/shop?categories=kaftan"
+                >
+                  kaftan
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="font-inter text-base leading-[23.55px] font-normal text-white capitalize"
+                  href="/shop?categories-midi-dress"
+                >
+                  midi dress
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="font-inter text-base leading-[23.55px] font-normal text-white capitalize"
+                  href="/shop?categories-pant"
+                >
+                  pant
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="font-inter text-base leading-[23.55px] font-normal text-white capitalize"
+                  href="/shop?categories=shirt"
+                >
+                  shirt
+                </Link>
+              </li>
+            </ul>
           </div>
 
           {/* Right: Email Subscribe + Social Icons */}
