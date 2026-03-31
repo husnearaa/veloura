@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Search, Plus, Star } from "lucide-react";
@@ -261,9 +262,28 @@ const products = [
   },
 ];
 
-const formatPrice = (price: number) => `৳${price}`;
-
 export default function ShopPage() {
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((item) => item !== category)
+        : [...prev, category]
+    );
+  };
+
+  const filteredProducts = useMemo(() => {
+    if (selectedCategories.length === 0) return products;
+
+    return products.filter((product) =>
+      selectedCategories.some(
+        (category) =>
+          product.category.toLowerCase() === category.toLowerCase()
+      )
+    );
+  }, [selectedCategories]);
+
   return (
     <section className="bg-[#f5f5f5]">
       <div className="p-[60px]">
@@ -296,6 +316,8 @@ export default function ShopPage() {
                   >
                     <input
                       type="checkbox"
+                      checked={selectedCategories.includes(category)}
+                      onChange={() => handleCategoryChange(category)}
                       className="h-[22px] w-[22px] rounded-[6px] border border-[#d1d5db] text-black focus:ring-0"
                     />
                     <span className="text-[16px] font-medium capitalize text-[#374151]">
@@ -310,7 +332,7 @@ export default function ShopPage() {
           {/* Products */}
           <div className="flex-1">
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-4 md:gap-x-5 md:gap-y-5">
-              {products.map((product) => (
+              {filteredProducts.map((product) => (
                 <div
                   key={product.id}
                   className="group relative overflow-hidden rounded-b-[18px] border border-[#dddddd] bg-white shadow-sm hover:shadow-md transition-all duration-300"
