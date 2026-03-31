@@ -5,6 +5,7 @@ import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 
+
 import "swiper/css";
 
 const videos = [
@@ -13,11 +14,10 @@ const videos = [
   "/reels/veloura_reel_3.mp4",
   "/reels/veloura_reel_4.mp4",
   "/reels/veloura_reel_5.mp4",
-  "/reels/vlada_reel_6.mp4",
-  "/reels/vlada_reel_7.mp4",
-  "/reels/vlada_reel_8.mp4",
-  "/reels/vlada_reel_9.mp4",
-  "/reels/vlada_reel_1.mp4",
+  "/reels/veloura_reel_6.mp4",
+  "/reels/veloura_reel_7.mp4",
+  "/reels/veloura_reel_1.mp4",
+
 ];
 
 const VelouraFashion = () => {
