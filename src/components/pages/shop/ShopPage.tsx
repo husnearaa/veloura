@@ -42,7 +42,7 @@ const products = [
   },
   {
     id: 2,
-    name: "Sukoon",
+    name: "Velora",
     category: "Two Piece",
     price: 3200,
     oldPrice: null,
