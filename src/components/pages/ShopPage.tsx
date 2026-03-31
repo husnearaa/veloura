@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -270,12 +271,29 @@ const products = [
 ];
 
 export default function ShopPage() {
+  const searchParams = useSearchParams();
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState(true);
   const [tempSelectedCategories, setTempSelectedCategories] = useState<string[]>(
     []
   );
+
+  useEffect(() => {
+    const categoryFromUrl = searchParams.get("categories");
+
+    if (categoryFromUrl) {
+      const formattedCategory = categoryFromUrl.replace(/-/g, " ").toLowerCase();
+
+      if (categories.includes(formattedCategory)) {
+        setSelectedCategories([formattedCategory]);
+        setTempSelectedCategories([formattedCategory]);
+      }
+    } else {
+      setSelectedCategories([]);
+      setTempSelectedCategories([]);
+    }
+  }, [searchParams]);
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategories((prev) =>
@@ -384,9 +402,7 @@ export default function ShopPage() {
                     <div>
                       <button
                         type="button"
-                        onClick={() =>
-                          setMobileCategoryOpen((prev) => !prev)
-                        }
+                        onClick={() => setMobileCategoryOpen((prev) => !prev)}
                         className="mb-5 flex w-full items-center justify-between"
                       >
                         <span className="text-[16px] font-semibold text-[#111827]">
@@ -487,12 +503,12 @@ export default function ShopPage() {
           </aside>
 
           {/* Products */}
-          <div className="flex-1">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-4 md:gap-x-5 md:gap-y-5">
+          <div className="flex-1 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-4 md:gap-x-5 md:gap-y-5">
               {filteredProducts.map((product) => (
                 <div
                   key={product.id}
-                  className="group relative overflow-hidden rounded-b-[18px] border border-[#dddddd] bg-white shadow-sm hover:shadow-md transition-all duration-300"
+                  className="group relative w-full overflow-hidden rounded-b-[18px] border border-[#dddddd] bg-white shadow-sm hover:shadow-md transition-all duration-300"
                 >
                   <div className="relative overflow-hidden bg-gray-50">
                     <Link href={`/shop/${product.id}`}>
