@@ -18,8 +18,8 @@ const ProductDetailsPage = () => {
         <Image
           alt="Classy"
           loading="lazy"
-          width="1000"
-          height="1000"
+          width={1000}
+          height={1000}
           decoding="async"
           data-nimg="1"
           className="h-screen w-screen object-cover"
@@ -50,6 +50,8 @@ const ProductDetailsPage = () => {
                     alt="Product image 1"
                     decoding="async"
                     data-nimg="fill"
+                    width={1000}
+                    height={1000}
                     className="object-cover transition-transform duration-300"
                     style={{
                       position: "absolute",
@@ -74,6 +76,8 @@ const ProductDetailsPage = () => {
                     alt="Product image 2"
                     decoding="async"
                     data-nimg="fill"
+                        width={1000}
+                    height={1000}
                     className="object-cover transition-transform duration-300"
                     style={{
                       position: "absolute",
@@ -98,6 +102,8 @@ const ProductDetailsPage = () => {
                     alt="Product image 3"
                     decoding="async"
                     data-nimg="fill"
+                    width={1000}
+                    height={1000}
                     className="object-cover transition-transform duration-300"
                     style={{
                       position: "absolute",
