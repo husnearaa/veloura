@@ -85,7 +85,7 @@ const HeroSection = () => {
               </Link>
             </div>
 
-            <h1 className="absolute bottom-65 left-1/2 -translate-x-1/2 text-white/90 text-[80px] md:text-[200px] tracking-widest pointer-events-none">
+            <h1 className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/90 text-[80px] md:text-[200px] tracking-widest pointer-events-none">
               VELOURA
             </h1>
           </div>
@@ -101,7 +101,7 @@ const HeroSection = () => {
             />
 
             <div className="absolute z-10 h-full w-full flex flex-col justify-center px-6 md:px-16">
-              <h1 className="text-white text-3xl md:text-7xl mb-6">
+              <h1 className="text-black text-3xl md:text-7xl mb-6">
                 Be your own icon
               </h1>
 
@@ -112,8 +112,7 @@ const HeroSection = () => {
                 Explore
               </Link>
             </div>
-
-            <h1 className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/90 text-[80px] md:text-[200px] tracking-widest pointer-events-none">
+            <h1 className="absolute bottom-65 left-1/2 -translate-x-1/2 text-white/90 text-[80px] md:text-[200px] tracking-widest pointer-events-none">
               VELOURA
             </h1>
           </div>
