@@ -3,7 +3,14 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Plus, Star } from "lucide-react";
+import {
+  Search,
+  Plus,
+  Star,
+  Funnel,
+  ChevronDown,
+  X,
+} from "lucide-react";
 import ThreeImg1 from "@/assets/shop/three1.jpg";
 import ThreeImg2 from "@/assets/shop/three2.jpg";
 import TwoImg1 from "@/assets/shop/two1.jpg";
@@ -264,6 +271,11 @@ const products = [
 
 export default function ShopPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [mobileCategoryOpen, setMobileCategoryOpen] = useState(true);
+  const [tempSelectedCategories, setTempSelectedCategories] = useState<string[]>(
+    []
+  );
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategories((prev) =>
@@ -273,58 +285,203 @@ export default function ShopPage() {
     );
   };
 
+  const handleTempCategoryChange = (category: string) => {
+    setTempSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((item) => item !== category)
+        : [...prev, category]
+    );
+  };
+
+  const openMobileFilters = () => {
+    setTempSelectedCategories(selectedCategories);
+    setMobileFiltersOpen(true);
+  };
+
+  const applyMobileFilters = () => {
+    setSelectedCategories(tempSelectedCategories);
+    setMobileFiltersOpen(false);
+  };
+
+  const clearMobileFilters = () => {
+    setTempSelectedCategories([]);
+    setSelectedCategories([]);
+    setMobileFiltersOpen(false);
+  };
+
   const filteredProducts = useMemo(() => {
     if (selectedCategories.length === 0) return products;
 
     return products.filter((product) =>
       selectedCategories.some(
-        (category) =>
-          product.category.toLowerCase() === category.toLowerCase()
+        (category) => product.category.toLowerCase() === category.toLowerCase()
       )
     );
   }, [selectedCategories]);
 
   return (
     <section className="bg-[#f5f5f5]">
-      <div className="p-[60px]">
+      <div className="p-[20px] md:p-[60px]">
         <h1 className="mt-[20px] text-2xl md:text-[50.242px] lg:text-[98.242px] font-inter">
           Shop what you love.
         </h1>
 
         <div className="mt-8 md:mt-10 flex flex-col md:flex-row items-start gap-6 md:gap-7 xl:gap-8">
           {/* Sidebar */}
-          <aside className="w-[230px] shrink-0">
-            <div className="relative mb-6">
-              <Search className="absolute left-4 top-1/2 h-[22px] w-[22px] -translate-y-1/2 text-[#9ca3af]" />
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="h-[58px] w-full rounded-[14px] border border-[#e3e3e3] bg-white pl-[46px] pr-4 text-[16px] text-[#374151] outline-none placeholder:text-[#9ca3af]"
-              />
+          <aside className="w-full md:w-[230px] shrink-0">
+            {/* Mobile Filter Button */}
+            <div className="w-full md:hidden mb-6">
+              <button
+                onClick={openMobileFilters}
+                className="w-full flex items-center justify-between p-4 bg-white rounded-[14px] shadow-sm border border-gray-200"
+              >
+                <div className="flex items-center gap-3">
+                  <Funnel className="w-5 h-5 text-gray-600" />
+                  <span className="font-semibold text-gray-900">Filters</span>
+                </div>
+
+                <ChevronDown className="w-5 h-5 text-gray-600" />
+              </button>
             </div>
 
-            <div className="rounded-[18px] border border-[#dddddd] bg-white px-[24px] py-[24px] shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
-              <h2 className="mb-8 text-[18px] font-semibold text-[#111827]">
-                Categories
-              </h2>
+            {/* Mobile Filter Drawer */}
+            {mobileFiltersOpen && (
+              <div className="fixed inset-0 z-50 md:hidden">
+                <div
+                  className="absolute inset-0 bg-black/30"
+                  onClick={() => setMobileFiltersOpen(false)}
+                />
 
-              <div className="space-y-8">
-                {categories.map((category) => (
-                  <label
-                    key={category}
-                    className="flex cursor-pointer items-center gap-4"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedCategories.includes(category)}
-                      onChange={() => handleCategoryChange(category)}
-                      className="h-[22px] w-[22px] rounded-[6px] border border-[#d1d5db] text-black focus:ring-0"
-                    />
-                    <span className="text-[16px] font-medium capitalize text-[#374151]">
-                      {category}
-                    </span>
-                  </label>
-                ))}
+                <div className="absolute inset-x-0 bottom-0 top-0 bg-[#f5f5f5] flex flex-col rounded-t-[32px] overflow-hidden">
+                  {/* Header */}
+                  <div className="flex items-center justify-between px-6 py-8 bg-white border-b border-gray-200">
+                    <h2 className="text-[18px] font-semibold text-[#111827]">
+                      Filters
+                    </h2>
+
+                    <button onClick={() => setMobileFiltersOpen(false)}>
+                      <X className="w-6 h-6 text-black" />
+                    </button>
+                  </div>
+
+                  {/* Body */}
+                  <div className="flex-1 overflow-y-auto px-6 py-6">
+                    <div className="mb-8">
+                      <h3 className="mb-4 text-[16px] font-semibold text-[#111827]">
+                        Search
+                      </h3>
+
+                      <div className="relative">
+                        <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+                        <input
+                          type="text"
+                          placeholder="Search products..."
+                          className="h-[52px] w-full rounded-[14px] border border-[#d9d9d9] bg-white pl-12 pr-4 text-[16px] text-[#374151] outline-none placeholder:text-[#9ca3af]"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setMobileCategoryOpen((prev) => !prev)
+                        }
+                        className="mb-5 flex w-full items-center justify-between"
+                      >
+                        <span className="text-[16px] font-semibold text-[#111827]">
+                          Categories
+                        </span>
+
+                        <ChevronDown
+                          className={`h-5 w-5 text-black transition-transform duration-300 ${
+                            mobileCategoryOpen ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+
+                      {mobileCategoryOpen && (
+                        <div className="space-y-6">
+                          {categories.map((category) => (
+                            <label
+                              key={category}
+                              className="flex items-center gap-4 cursor-pointer"
+                            >
+                              <input
+                                type="checkbox"
+                                checked={tempSelectedCategories.includes(
+                                  category
+                                )}
+                                onChange={() =>
+                                  handleTempCategoryChange(category)
+                                }
+                                className="h-6 w-6 rounded-[6px] border border-[#cfd4dc] text-black focus:ring-0"
+                              />
+
+                              <span className="text-[16px] font-medium capitalize text-[#374151]">
+                                {category}
+                              </span>
+                            </label>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Footer */}
+                  <div className="grid grid-cols-2 gap-3 border-t border-gray-200 bg-white p-6">
+                    <button
+                      onClick={clearMobileFilters}
+                      className="h-[56px] rounded-[14px] border border-[#cfd4dc] bg-white text-[16px] font-semibold text-[#374151]"
+                    >
+                      Clear All
+                    </button>
+
+                    <button
+                      onClick={applyMobileFilters}
+                      className="h-[56px] rounded-[14px] bg-black text-[16px] font-semibold text-white"
+                    >
+                      Apply Filters
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Desktop Sidebar */}
+            <div className="hidden md:block">
+              <div className="relative mb-6">
+                <Search className="absolute left-4 top-1/2 h-[22px] w-[22px] -translate-y-1/2 text-[#9ca3af]" />
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  className="h-[58px] w-full rounded-[14px] border border-[#e3e3e3] bg-white pl-[46px] pr-4 text-[16px] text-[#374151] outline-none placeholder:text-[#9ca3af]"
+                />
+              </div>
+
+              <div className="rounded-[18px] border border-[#dddddd] bg-white px-[24px] py-[24px] shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+                <h2 className="mb-8 text-[18px] font-semibold text-[#111827]">
+                  Categories
+                </h2>
+
+                <div className="space-y-8">
+                  {categories.map((category) => (
+                    <label
+                      key={category}
+                      className="flex cursor-pointer items-center gap-4"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedCategories.includes(category)}
+                        onChange={() => handleCategoryChange(category)}
+                        className="h-[22px] w-[22px] rounded-[6px] border border-[#d1d5db] text-black focus:ring-0"
+                      />
+                      <span className="text-[16px] font-medium capitalize text-[#374151]">
+                        {category}
+                      </span>
+                    </label>
+                  ))}
+                </div>
               </div>
             </div>
           </aside>
@@ -337,7 +494,6 @@ export default function ShopPage() {
                   key={product.id}
                   className="group relative overflow-hidden rounded-b-[18px] border border-[#dddddd] bg-white shadow-sm hover:shadow-md transition-all duration-300"
                 >
-                  {/* Image */}
                   <div className="relative overflow-hidden bg-gray-50">
                     <Link href={`/shop/${product.id}`}>
                       <Image
@@ -351,7 +507,6 @@ export default function ShopPage() {
                       />
                     </Link>
 
-                    {/* Out of stock */}
                     {product.outOfStock && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black/45">
                         <span className="rounded-lg bg-white px-3 py-1.5 text-sm font-semibold text-gray-800">
@@ -360,14 +515,12 @@ export default function ShopPage() {
                       </div>
                     )}
 
-                    {/* Discount */}
                     {product.badge && !product.outOfStock && (
                       <div className="absolute left-2 top-2 rounded-full bg-red-500 px-2 py-1 text-xs font-semibold text-white">
                         {product.badge}
                       </div>
                     )}
 
-                    {/* Add to Cart */}
                     {!product.outOfStock && (
                       <div className="absolute inset-x-2 bottom-2 translate-y-0 opacity-100 transition-all duration-300 md:translate-y-full md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100">
                         <button className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white shadow-md hover:shadow-lg">
@@ -378,7 +531,6 @@ export default function ShopPage() {
                     )}
                   </div>
 
-                  {/* Content */}
                   <div className="space-y-2 p-4">
                     <div className="space-y-0.5">
                       <p className="text-xs font-medium capitalize text-gray-500">
@@ -390,7 +542,6 @@ export default function ShopPage() {
                       </p>
                     </div>
 
-                    {/* Rating */}
                     <div className="flex items-center gap-1">
                       <div className="flex items-center gap-0.5">
                         <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
@@ -404,7 +555,6 @@ export default function ShopPage() {
                       </span>
                     </div>
 
-                    {/* Price */}
                     <div className="flex items-center gap-2">
                       <span className="text-base font-bold text-gray-900">
                         ৳{product.price}
