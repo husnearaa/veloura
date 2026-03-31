@@ -198,6 +198,28 @@ body .skiptranslate {
 /**********
 
 
+/* addition css for veloura fashion section */
+
+/* .fashion-swiper .swiper-slide {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 0.72;
+}
+
+.fashion-swiper .swiper-slide-active {
+  opacity: 1;
+}
+
+.veloura-swiper .swiper-slide {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.veloura-swiper .swiper-slide-shadow-left,
+.veloura-swiper .swiper-slide-shadow-right {
+  display: none;
+} */
+
+/* ///////////////////// */
+
 
 
 /********************* Ant Design Customization  ****************************/
