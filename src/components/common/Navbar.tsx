@@ -35,7 +35,11 @@ export default function Navbar() {
   const shopCategories = [
     { name: "ONE PIECE", href: "/shop?categories=one-piece", delay: "0ms" },
     { name: "TWO PIECE", href: "/shop?categories=two-piece", delay: "100ms" },
-    { name: "THREE PIECE", href: "/shop?categories=three-piece", delay: "200ms" },
+    {
+      name: "THREE PIECE",
+      href: "/shop?categories=three-piece",
+      delay: "200ms",
+    },
     { name: "KAFTAN", href: "/shop?categories=kaftan", delay: "300ms" },
     { name: "MIDI DRESS", href: "/shop?categories=midi-dress", delay: "400ms" },
     { name: "PANT", href: "/shop?categories=pant", delay: "500ms" },
@@ -77,7 +81,9 @@ export default function Navbar() {
               className="w-[100px] h-auto"
               priority
             /> */}
-            <h1 className="text-xl font-bold uppercase text-gray-800 hover:text-gray-600 transition-colors">Veloura</h1>
+            <h1 className="text-xl font-bold uppercase text-gray-800 hover:text-gray-600 transition-colors">
+              Veloura
+            </h1>
           </Link>
 
           {/* DESKTOP NAVIGATION */}
@@ -88,13 +94,13 @@ export default function Navbar() {
             >
               HOME
             </Link>
-
             {/* Shop Dropdown */}
             <div className="relative group">
               <button
                 className="text-gray-800 hover:text-gray-600 px-3 py-2 text-sm font-medium tracking-wide transition-colors duration-200 uppercase flex items-center gap-1"
                 onMouseEnter={() => setIsShopDropdownOpen(true)}
                 onMouseLeave={() => setIsShopDropdownOpen(false)}
+                onClick={() => router.push("/shop")}
               >
                 SHOP
                 <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
@@ -149,7 +155,7 @@ export default function Navbar() {
                 Login
               </Link>
             )}
-            
+
             {/* Language Dropdown - Beside cart icon */}
             <div className="relative">
               <button
@@ -244,7 +250,9 @@ export default function Navbar() {
         {/* MOBILE MENU */}
         <div
           className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
-            isMobileMenuOpen ? "max-h-screen opacity-100 mt-4" : "max-h-0 opacity-0"
+            isMobileMenuOpen
+              ? "max-h-screen opacity-100 mt-4"
+              : "max-h-0 opacity-0"
           }`}
         >
           <div className="px-2 space-y-1 border-t border-gray-100 pt-4">
@@ -269,10 +277,12 @@ export default function Navbar() {
                   }`}
                 />
               </button>
-              
+
               <div
                 className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                  isShopDropdownOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                  isShopDropdownOpen
+                    ? "max-h-96 opacity-100"
+                    : "max-h-0 opacity-0"
                 }`}
               >
                 <div className="pl-6 space-y-1 mt-1">
