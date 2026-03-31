@@ -45,7 +45,6 @@ export default function Navbar() {
   const languages = [
     { name: "ENGLISH", code: "en", delay: "0ms" },
     { name: "BENGALI", code: "bn", delay: "100ms" },
-    { name: "ARABIC", code: "ar", delay: "200ms" },
   ];
 
   const toggleMobileMenu = () => {
