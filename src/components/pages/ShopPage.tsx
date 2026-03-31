@@ -272,6 +272,7 @@ const products = [
 
 export default function ShopPage() {
   const searchParams = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState(true);
@@ -324,18 +325,37 @@ export default function ShopPage() {
   const clearMobileFilters = () => {
     setTempSelectedCategories([]);
     setSelectedCategories([]);
+    setSearchTerm("");
     setMobileFiltersOpen(false);
   };
 
-  const filteredProducts = useMemo(() => {
-    if (selectedCategories.length === 0) return products;
+const filteredProducts = useMemo(() => {
+  const normalizedSearch = searchTerm.trim().toLowerCase();
 
-    return products.filter((product) =>
+  return products.filter((product) => {
+    const matchesCategory =
+      selectedCategories.length === 0 ||
       selectedCategories.some(
-        (category) => product.category.toLowerCase() === category.toLowerCase()
-      )
-    );
-  }, [selectedCategories]);
+        (category) =>
+          product.category.toLowerCase() === category.toLowerCase()
+      );
+
+    const isNumberSearch = !isNaN(Number(normalizedSearch));
+
+    const matchesPrice =
+      isNumberSearch &&
+      (product.price === Number(normalizedSearch) ||
+        product.oldPrice === Number(normalizedSearch));
+
+    const matchesSearch =
+      normalizedSearch === "" ||
+      product.name.toLowerCase().includes(normalizedSearch) ||
+      product.category.toLowerCase().includes(normalizedSearch) ||
+      matchesPrice;
+
+    return matchesCategory && matchesSearch;
+  });
+}, [selectedCategories, searchTerm]);
 
   return (
     <section className="bg-[#f5f5f5]">
@@ -393,6 +413,8 @@ export default function ShopPage() {
                         <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
                         <input
                           type="text"
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
                           placeholder="Search products..."
                           className="h-[52px] w-full rounded-[14px] border border-[#d9d9d9] bg-white pl-12 pr-4 text-[16px] text-[#374151] outline-none placeholder:text-[#9ca3af]"
                         />
@@ -470,6 +492,8 @@ export default function ShopPage() {
                 <Search className="absolute left-4 top-1/2 h-[22px] w-[22px] -translate-y-1/2 text-[#9ca3af]" />
                 <input
                   type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search products..."
                   className="h-[58px] w-full rounded-[14px] border border-[#e3e3e3] bg-white pl-[46px] pr-4 text-[16px] text-[#374151] outline-none placeholder:text-[#9ca3af]"
                 />
