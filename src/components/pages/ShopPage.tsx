@@ -313,7 +313,7 @@ export default function ShopPage() {
               {products.map((product) => (
                 <div
                   key={product.id}
-                  className="group relative overflow-hidden rounded-[18px] border border-[#dddddd] bg-white shadow-sm hover:shadow-md transition-all duration-300"
+                  className="group relative overflow-hidden rounded-b-[18px] border border-[#dddddd] bg-white shadow-sm hover:shadow-md transition-all duration-300"
                 >
                   {/* Image */}
                   <div className="relative overflow-hidden bg-gray-50">
