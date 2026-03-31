@@ -24,7 +24,7 @@ const VelouraFashion = () => {
                     {" "}
                     <div className="relative group cursor-pointer">
                       <video
-                        src="/reels/vlada reel 1.mp4"
+                        src="/reels/veloura_reel_1.mp4"
                         className="w-full h-auto rounded-lg"
                         preload="metadata"
                       ></video>
@@ -57,7 +57,7 @@ const VelouraFashion = () => {
                     {" "}
                     <div className="relative group cursor-pointer">
                       <video
-                       src="/reels/vlada_reel_2.mp4"
+                       src="/reels/veloura_reel_2.mp4"
                         className="w-full h-auto rounded-lg"
                         preload="metadata"
                       ></video>
@@ -91,7 +91,7 @@ const VelouraFashion = () => {
                     {" "}
                     <div className="relative group cursor-pointer">
                       <video
-                        src="/reels/vlada_reel_3.mp4"
+                        src="/reels/veloura_reel_3.mp4"
                         className="w-full h-auto rounded-lg"
                         preload="metadata"
                       ></video>
@@ -124,7 +124,7 @@ const VelouraFashion = () => {
                     {" "}
                     <div className="relative group cursor-pointer">
                       <video
-                        src="/reels/vlada_reel_4.mp4"
+                        src="/reels/veloura_reel_4.mp4"
                         className="w-full h-auto rounded-lg"
                         preload="metadata"
                       ></video>
@@ -157,7 +157,7 @@ const VelouraFashion = () => {
                     {" "}
                     <div className="relative group cursor-pointer">
                       <video
-                        src="/reels/vlada_reel_5.mp4"
+                        src="/reels/veloura_reel_5.mp4"
                         className="w-full h-auto rounded-lg"
                         preload="metadata"
                       ></video>
@@ -190,7 +190,7 @@ const VelouraFashion = () => {
                     {" "}
                     <div className="relative group cursor-pointer">
                       <video
-                        src="/reels/vlada_reel_6.mp4"
+                        src="/reels/veloura_reel_6.mp4"
                         className="w-full h-auto rounded-lg"
                         preload="metadata"
                       ></video>
@@ -223,7 +223,7 @@ const VelouraFashion = () => {
                     {" "}
                     <div className="relative group cursor-pointer">
                       <video
-                        src="/reels/vlada_reel_7.mp4"
+                        src="/reels/veloura_reel_7.mp4"
                         className="w-full h-auto rounded-lg"
                         preload="metadata"
                       ></video>
@@ -256,7 +256,7 @@ const VelouraFashion = () => {
                     {" "}
                     <div className="relative group cursor-pointer">
                       <video
-                        src="/reels/vlada_reel_8.mp4"
+                        src="/reels/veloura_reel_8.mp4"
                         className="w-full h-auto rounded-lg"
                         preload="metadata"
                       ></video>
@@ -289,7 +289,7 @@ const VelouraFashion = () => {
                     {" "}
                     <div className="relative group cursor-pointer">
                       <video
-                        src="/reels/vlada_reel_9.mp4"
+                        src="/reels/veloura_reel_9.mp4"
                         className="w-full h-auto rounded-lg"
                         preload="metadata"
                       ></video>
@@ -322,7 +322,7 @@ const VelouraFashion = () => {
                     {" "}
                     <div className="relative group cursor-pointer">
                       <video
-                        src="/reels/vlada_reel_1.mp4"
+                        src="/reels/veloura_reel_1.mp4"
                         className="w-full h-auto rounded-lg"
                         preload="metadata"
                       ></video>
