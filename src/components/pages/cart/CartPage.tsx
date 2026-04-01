@@ -29,7 +29,7 @@ const CartPage = () => {
   const totalPrice = isRemoved ? 0 : price * quantity;
   const totalItems = isRemoved ? 0 : quantity;
 
-  // ✅ EMPTY CART UI ONLY
+  // EMPTY CART UI ONLY
   if (isRemoved) {
     return (
       <div className="p-12 text-center">
