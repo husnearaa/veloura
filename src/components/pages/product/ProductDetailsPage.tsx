@@ -80,31 +80,32 @@ const ProductDetailsPage = () => {
     setQuantity((prev) => prev + 1);
   };
 
-// zooming logic ///
+  // zooming logic ///
 
   const [zoomStyle, setZoomStyle] = useState({
-  transformOrigin: "center center",
-  transform: "scale(1)",
-});
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-  const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
-
-  const x = ((e.clientX - left) / width) * 100;
-  const y = ((e.clientY - top) / height) * 100;
-
-  setZoomStyle({
-    transformOrigin: `${x}% ${y}%`,
-    transform: "scale(2)",
-  });
-};
-
-const handleMouseLeave = () => {
-  setZoomStyle({
     transformOrigin: "center center",
     transform: "scale(1)",
   });
-};
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { left, top, width, height } =
+      e.currentTarget.getBoundingClientRect();
+
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+
+    setZoomStyle({
+      transformOrigin: `${x}% ${y}%`,
+      transform: "scale(2)",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setZoomStyle({
+      transformOrigin: "center center",
+      transform: "scale(1)",
+    });
+  };
 
   return (
     <div>
@@ -200,26 +201,26 @@ const handleMouseLeave = () => {
       {/* part 5 */}
       <div className="min-h-screen bg-white">
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 px-4 lg:px-24 pb-8 lg:pb-[234px]">
-        <div className="w-full lg:w-1/2 xl:w-3/5 bg-[#EEEBE5] flex items-center justify-center p-4 sm:p-8 lg:p-1 xl:p-16">
-  <div
-    className="relative w-full max-w-[440px] max-h-[660px] overflow-hidden cursor-zoom-in"
-    onMouseMove={handleMouseMove}
-    onMouseLeave={handleMouseLeave}
-  >
-    <Image
-      alt="product details image"
-      loading="lazy"
-      width={1000}
-      height={1000}
-      className="w-full h-full object-contain transition-transform duration-200 ease-out"
-      style={{
-        color: "transparent",
-        ...zoomStyle,
-      }}
-      src={productImages[selectedImage]}
-    />
-  </div>
-</div>
+          <div className="w-full lg:w-1/2 xl:w-3/5 bg-[#EEEBE5] flex items-center justify-center p-4 sm:p-8 lg:p-1 xl:p-16">
+            <div
+              className="relative w-full max-w-[440px] max-h-[660px] overflow-hidden cursor-zoom-in"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Image
+                alt="product details image"
+                loading="lazy"
+                width={1000}
+                height={1000}
+                className="w-full h-full object-contain transition-transform duration-200 ease-out"
+                style={{
+                  color: "transparent",
+                  ...zoomStyle,
+                }}
+                src={productImages[selectedImage]}
+              />
+            </div>
+          </div>
 
           <div className="w-full lg:w-1/2 xl:w-2/5 flex flex-col py-4 lg:py-12 xl:py-24">
             <div className="flex-grow">
@@ -364,12 +365,18 @@ const handleMouseLeave = () => {
               </div>
 
               <div className="mt-4 flex items-center gap-6">
-                <button className="w-full rounded-full md:py-4 py-3 px-4 bg-black/60 hover:bg-black/30 text-white font-medium transition-colors duration-200 cursor-pointer">
+
+                <Link href={"/cart"} 
+                className="w-full rounded-full md:py-4 py-3 px-4 bg-black/60 hover:bg-black/30 text-white font-medium transition-colors duration-200 cursor-pointer">
                   Add to cart
-                </button>
-                <button className="w-full rounded-full md:py-4 py-3 px-4 text-black border border-black hover:bg-black hover:text-white font-medium transition-colors duration-200 cursor-pointer">
+                </Link>
+
+                <Link
+                  href="/checkout"
+                  className="w-full text-center rounded-full md:py-4 py-3 px-4 text-black border border-black hover:bg-black hover:text-white font-medium transition-colors duration-200 cursor-pointer block"
+                >
                   Buy Now
-                </button>
+                </Link>
               </div>
             </div>
           </div>
