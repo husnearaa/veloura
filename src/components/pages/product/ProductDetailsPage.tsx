@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import { ChevronLeft, ChevronRight, Minus, Plus } from "lucide-react";
+import SizeChartImage from "@/assets/images/size-chart.png";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -18,11 +19,12 @@ import TwoImg4 from "@/assets/shop/two4.jpg";
 import InstagramLogo from "@/assets/social_icons/instagram.png";
 import WhatsappLogo from "@/assets/social_icons/whatsapp.png";
 
-
 const ProductDetailsPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(1);
   const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [showSizeChart, setShowSizeChart] = useState(false);
 
   const productImages = [
     "https://server.vlada.store/uploads/image-1760106151531-172530450.jpg",
@@ -174,14 +176,17 @@ const ProductDetailsPage = () => {
       <div className="min-h-screen bg-white">
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 px-4 lg:px-24 pb-8 lg:pb-[234px]">
           <div className="w-full lg:w-1/2 xl:w-3/5 bg-[#EEEBE5] flex items-center justify-center p-4 sm:p-8 lg:p-1 xl:p-16">
-            <div className="relative w-full max-w-[440px] max-h-[660px] overflow-hidden cursor-zoom-in">
+            <div className="relative w-full max-w-[440px] max-h-[660px] overflow-hidden cursor-zoom-in group">
               <Image
                 alt="product details image"
                 loading="lazy"
                 width={1000}
                 height={1000}
-                className="w-full h-full object-contain transition-transform duration-300 ease-out"
-                style={{ color: "transparent", transformOrigin: "center" }}
+                className="w-full h-full object-contain transition-transform duration-300 ease-out group-hover:scale-150"
+                style={{
+                  color: "transparent",
+                  transformOrigin: "center center",
+                }}
                 src={productImages[selectedImage]}
               />
             </div>
@@ -234,31 +239,30 @@ const ProductDetailsPage = () => {
               <div className="my-6">
                 <p className="font-medium capitalize mb-3">Select Size :</p>
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                  <button className="text-sm border min-w-[44px] h-[44px] border-gray-300 hover:border-gray-400 px-3 py-2 cursor-pointer transition-colors duration-200 uppercase">
-                    XS
-                  </button>
-                  <button className="text-sm border min-w-[44px] h-[44px] border-gray-300 hover:border-gray-400 px-3 py-2 cursor-pointer transition-colors duration-200 uppercase">
-                    S
-                  </button>
-                  <button className="text-sm border min-w-[44px] h-[44px] border-gray-300 hover:border-gray-400 px-3 py-2 cursor-pointer transition-colors duration-200 uppercase">
-                    M
-                  </button>
-                  <button className="text-sm border min-w-[44px] h-[44px] border-gray-300 hover:border-gray-400 px-3 py-2 cursor-pointer transition-colors duration-200 uppercase">
-                    L
-                  </button>
-                  <button className="text-sm border min-w-[44px] h-[44px] border-gray-300 hover:border-gray-400 px-3 py-2 cursor-pointer transition-colors duration-200 uppercase">
-                    XL
-                  </button>
-                  <button className="text-sm border min-w-[44px] h-[44px] border-gray-300 hover:border-gray-400 px-3 py-2 cursor-pointer transition-colors duration-200 uppercase">
-                    2XL
-                  </button>
+                  {["XS", "S", "M", "L", "XL", "2XL"].map((size) => (
+                    <button
+                      key={size}
+                      type="button"
+                      onClick={() => setSelectedSize(size)}
+                      className={`text-sm border min-w-[44px] h-[44px] px-3 py-2 cursor-pointer transition-colors duration-200 uppercase ${
+                        selectedSize === size
+                          ? "bg-black text-white border-black"
+                          : "border-gray-300 hover:border-gray-400 text-black bg-white"
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
                 </div>
                 <p className="text-red-600 min-h-[1.5rem]"></p>
               </div>
 
               <div className="my-6">
-                <button className="border border-black rounded-full px-14 py-3 text-sm font-medium hover:bg-black hover:text-white transition-colors duration-200
-                capitalize cursor-pointer">
+                <button
+                  type="button"
+                  onClick={() => setShowSizeChart(true)}
+                  className="border border-black rounded-full px-14 py-3 text-sm font-medium hover:bg-black hover:text-white transition-colors duration-200 capitalize cursor-pointer"
+                >
                   View Size Chart
                 </button>
               </div>
@@ -277,7 +281,7 @@ const ProductDetailsPage = () => {
                       width={500}
                       height={500}
                       className="w-[36px] h-[32px]"
-                   src={InstagramLogo}
+                      src={InstagramLogo}
                       style={{ color: "transparent" }}
                     />
                   </Link>
@@ -288,7 +292,7 @@ const ProductDetailsPage = () => {
                       width={500}
                       height={500}
                       className="w-[36px] h-[36px]"
-                     src={WhatsappLogo}
+                      src={WhatsappLogo}
                       style={{ color: "transparent" }}
                     />
                   </Link>
