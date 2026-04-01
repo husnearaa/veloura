@@ -113,7 +113,7 @@ const handleMouseLeave = () => {
         <p className="text-center font-inter text-[12px] leading-none capitalize">
           two piece
         </p>
-        <h1 className="text-8xl text-center font-inter font-normal text-[#1D1D1D] leading-24 tracking-[-2.88px]">
+        <h1 className="lg:text-8xl md:text-6xl text-4xl text-center font-inter font-normal text-[#1D1D1D] leading-24 tracking-[-2.88px]">
           Whisperlight
         </h1>
       </div>
@@ -364,10 +364,10 @@ const handleMouseLeave = () => {
               </div>
 
               <div className="mt-4 flex items-center gap-6">
-                <button className="w-full rounded-full py-4 px-4 bg-black/60 hover:bg-black/30 text-white font-medium transition-colors duration-200 cursor-pointer">
+                <button className="w-full rounded-full md:py-4 py-3 px-4 bg-black/60 hover:bg-black/30 text-white font-medium transition-colors duration-200 cursor-pointer">
                   Add to cart
                 </button>
-                <button className="w-full rounded-full py-4 px-4 text-black border border-black hover:bg-black hover:text-white font-medium transition-colors duration-200 cursor-pointer">
+                <button className="w-full rounded-full md:py-4 py-3 px-4 text-black border border-black hover:bg-black hover:text-white font-medium transition-colors duration-200 cursor-pointer">
                   Buy Now
                 </button>
               </div>
@@ -379,7 +379,7 @@ const handleMouseLeave = () => {
       {/* part 6 */}
       <div className="px-2 md:px-[60px] lg:px-[100px] pt-[110px] pb-[270px] bg-white border-t border-black/20">
         <div className="flex justify-between items-center">
-          <h1 className="text-[#1D1D1D] font-normal text-2xl lg:text-4xl">
+          <h1 className="text-[#1D1D1D] font-normal md:text-2xl text-xl lg:text-4xl">
             You might also like
           </h1>
 
