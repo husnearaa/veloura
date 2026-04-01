@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
-import { ChevronLeft, ChevronRight, Minus, Plus } from "lucide-react";
+import { ChevronLeft, ChevronRight, Minus, Plus, X } from "lucide-react";
 import SizeChartImage from "@/assets/images/size-chart.png";
 
 import "swiper/css";
@@ -101,7 +101,6 @@ const ProductDetailsPage = () => {
           height={1000}
           className="h-screen w-screen object-cover"
           style={{ color: "transparent" }}
-          // src={productImages[0]}
           src={
             "https://server.vlada.store/uploads/image-1760107166536-985689.jpg"
           }
@@ -273,7 +272,7 @@ const ProductDetailsPage = () => {
                   <Link
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="https://www.facebook.com"
+                    href="https://www.instagram.com"
                   >
                     <Image
                       alt="messenger logo"
@@ -285,7 +284,7 @@ const ProductDetailsPage = () => {
                       style={{ color: "transparent" }}
                     />
                   </Link>
-                  <Link target="_blank" href="https://wa.me/+8801626969596">
+                  <Link target="_blank" href="https://www.whatsapp.com">
                     <Image
                       alt="whatsapp logo"
                       loading="lazy"
@@ -393,6 +392,30 @@ const ProductDetailsPage = () => {
           ))}
         </div>
       </div>
+
+      {showSizeChart && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/40 px-4">
+          <div className="relative bg-white rounded-[12px] max-w-[600px] w-full p-4 md:p-10 shadow-xl">
+            <button
+              type="button"
+              onClick={() => setShowSizeChart(false)}
+              className="absolute right-4 top-4 text-black cursor-pointer"
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            <div className="relative w-full">
+              <Image
+                src={SizeChartImage}
+                alt="Size Chart"
+                width={1200}
+                height={900}
+                className="w-full h-auto object-contain rounded-md"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
