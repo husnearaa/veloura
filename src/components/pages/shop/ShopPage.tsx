@@ -16,6 +16,7 @@ import ThreeImg1 from "@/assets/shop/three1.jpg";
 import ThreeImg2 from "@/assets/shop/three2.jpg";
 import TwoImg1 from "@/assets/shop/two1.jpg";
 import TwoImg2 from "@/assets/shop/two2.jpg";
+import TwoImg4 from "@/assets/shop/two4.jpg";
 
 const categories = [
   "one piece",
@@ -54,13 +55,13 @@ const products = [
   },
   {
     id: 3,
-    name: "Lime Lustre",
+    name: "Whisperlight",
     category: "Two Piece",
-    price: 3480,
+    price: 3520,
     oldPrice: null,
     rating: 0,
     reviews: 0,
-    image: TwoImg2,
+    image: TwoImg4,
     badge: null,
     outOfStock: false,
   },
@@ -120,7 +121,7 @@ const products = [
     oldPrice: 4000,
     rating: 0,
     reviews: 0,
-    image: "/assets/shop/shop-8.jpg",
+    image: TwoImg2,
     badge: "-12%",
     outOfStock: true,
   },
