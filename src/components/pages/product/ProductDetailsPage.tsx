@@ -365,9 +365,10 @@ const ProductDetailsPage = () => {
               </div>
 
               <div className="mt-4 flex items-center gap-6">
-
-                <Link href={"/cart"} 
-                className="w-full rounded-full md:py-4 py-3 px-4 bg-black/60 hover:bg-black/30 text-white font-medium transition-colors duration-200 cursor-pointer">
+                <Link
+                  href="/cart"
+                  className="w-full inline-block text-center rounded-full md:py-4 py-3 px-4 bg-black/60 hover:bg-black/30 text-white font-medium transition-colors duration-200 cursor-pointer"
+                >
                   Add to cart
                 </Link>
 
