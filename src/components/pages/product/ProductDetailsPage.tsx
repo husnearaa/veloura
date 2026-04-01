@@ -253,10 +253,12 @@ const ProductDetailsPage = () => {
                     2XL
                   </button>
                 </div>
+                <p className="text-red-600 min-h-[1.5rem]"></p>
               </div>
 
               <div className="my-6">
-                <button className="border border-black rounded-full px-8 py-3 text-sm font-medium hover:bg-black hover:text-white transition-colors duration-200">
+                <button className="border border-black rounded-full px-14 py-3 text-sm font-medium hover:bg-black hover:text-white transition-colors duration-200
+                capitalize cursor-pointer">
                   View Size Chart
                 </button>
               </div>
@@ -329,10 +331,10 @@ const ProductDetailsPage = () => {
               </div>
 
               <div className="mt-4 flex items-center gap-6">
-                <button className="w-full rounded-full py-4 px-4 bg-black/60 text-white font-medium transition-colors duration-200 cursor-pointer">
+                <button className="w-full rounded-full py-4 px-4 bg-black/60 hover:bg-black/30 text-white font-medium transition-colors duration-200 cursor-pointer">
                   Add to cart
                 </button>
-                <button className="w-full rounded-full py-4 px-4 text-black border border-black font-medium transition-colors duration-200 cursor-pointer">
+                <button className="w-full rounded-full py-4 px-4 text-black border border-black hover:bg-black hover:text-white font-medium transition-colors duration-200 cursor-pointer">
                   Buy Now
                 </button>
               </div>
