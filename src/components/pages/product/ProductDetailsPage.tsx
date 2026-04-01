@@ -6,17 +6,18 @@ import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
-import { ChevronLeft, ChevronRight, Minus, Plus } from "lucide-react";
+import { ChevronLeft, ChevronRight, Instagram, Minus, Plus } from "lucide-react";
 
 import "swiper/css";
 import "swiper/css/navigation";
-
-
 
 import TwoImg1 from "@/assets/shop/two1.jpg";
 import TwoImg2 from "@/assets/shop/two2.jpg";
 import TwoImg3 from "@/assets/shop/two3.jpg";
 import TwoImg4 from "@/assets/shop/two4.jpg";
+import InstagramLogo from "@/assets/social_icons/instagram.png";
+import WhatsappLogo from "@/assets/social_icons/whatsapp.png";
+
 
 const ProductDetailsPage = () => {
   const [quantity, setQuantity] = useState(1);
@@ -24,14 +25,12 @@ const ProductDetailsPage = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
 
   const productImages = [
-      "https://server.vlada.store/uploads/image-1760106151531-172530450.jpg",
+    "https://server.vlada.store/uploads/image-1760106151531-172530450.jpg",
     "https://server.vlada.store/uploads/image-1760106151212-517834549.jpg",
     "https://server.vlada.store/uploads/image-1760106151205-975599735.jpg",
     "https://server.vlada.store/uploads/image-1760106151243-979294032.jpg",
     "https://server.vlada.store/uploads/image-1760106151501-474043281.jpg",
-
   ];
-  
 
   const relatedProducts = [
     {
@@ -101,7 +100,9 @@ const ProductDetailsPage = () => {
           className="h-screen w-screen object-cover"
           style={{ color: "transparent" }}
           // src={productImages[0]}
-          src={"https://server.vlada.store/uploads/image-1760107166536-985689.jpg"}
+          src={
+            "https://server.vlada.store/uploads/image-1760107166536-985689.jpg"
+          }
         />
       </div>
 
@@ -204,7 +205,7 @@ const ProductDetailsPage = () => {
                 <s className="text-gray-500 text-sm">4000 TK</s>
               </div>
 
-              <div className="my-7 text-sm text-[#1D1D1D] space-y-3 leading-6">
+              <div className="my-7 text-sm text-[#1D1D1D] space-y-3 leading-6 prose ql-editor ">
                 <p>
                   <span className="font-semibold">Name-</span> Whisperlight
                 </p>
@@ -221,9 +222,7 @@ const ProductDetailsPage = () => {
                     light and movement — soft ombre tones, subtle pearl glints,
                     Hand Embroidery
                   </p>
-                  <p>
-                    and intricate threadwork that reveals a closer look.
-                  </p>
+                  <p>and intricate threadwork that reveals a closer look.</p>
                   <p>
                     It’s the kind of detail you wear like second skin. Refined,
                     feminine, unfussy. Just
@@ -263,17 +262,34 @@ const ProductDetailsPage = () => {
               </div>
 
               <div className="flex items-center justify-between my-6">
-                <a href="#" className="underline text-sm text-[#1D1D1D]">
-                  For customize order contact us
-                </a>
-
-                <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-full bg-pink-500 text-white flex items-center justify-center text-[10px]">
-                    m
-                  </span>
-                  <span className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px]">
-                    w
-                  </span>
+                <p className="underline">For custom size order contact us</p>
+                <div className="flex gap-2 items-center">
+                  <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://www.facebook.com"
+                  >
+                    <Image
+                      alt="messenger logo"
+                      loading="lazy"
+                      width={500}
+                      height={500}
+                      className="w-[36px] h-[32px]"
+                   src={InstagramLogo}
+                      style={{ color: "transparent" }}
+                    />
+                  </Link>
+                  <Link target="_blank" href="https://wa.me/+8801626969596">
+                    <Image
+                      alt="whatsapp logo"
+                      loading="lazy"
+                      width={500}
+                      height={500}
+                      className="w-[36px] h-[36px]"
+                     src={WhatsappLogo}
+                      style={{ color: "transparent" }}
+                    />
+                  </Link>
                 </div>
               </div>
             </div>
