@@ -296,7 +296,7 @@ const ProductDetailsPage = () => {
                   objectFit: "cover",
                   color: "transparent",
                 }}
-                src="https://server.vlada.store/uploads/image-1757703278874-815415987.jpg"
+                src="https://server.vlada.store/uploads/image-1757703278074-815415987.jpg"
               />
             </div>
             <div className="mt-4 flex flex-col items-center gap-2">
