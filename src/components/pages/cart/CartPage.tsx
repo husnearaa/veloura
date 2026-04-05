@@ -28,7 +28,7 @@ const CartPage = () => {
     const updatedItems = cartItems.map((item) =>
       item.productId === productId && item.size === size
         ? { ...item, quantity: item.quantity + 1 }
-        : item
+        : item,
     );
 
     setCartItems(updatedItems);
@@ -38,7 +38,7 @@ const CartPage = () => {
 
   const decreaseQty = (productId: number, size?: string) => {
     const targetItem = cartItems.find(
-      (item) => item.productId === productId && item.size === size
+      (item) => item.productId === productId && item.size === size,
     );
 
     if (!targetItem) return;
@@ -47,13 +47,13 @@ const CartPage = () => {
 
     if (targetItem.quantity === 1) {
       updatedItems = cartItems.filter(
-        (item) => !(item.productId === productId && item.size === size)
+        (item) => !(item.productId === productId && item.size === size),
       );
     } else {
       updatedItems = cartItems.map((item) =>
         item.productId === productId && item.size === size
           ? { ...item, quantity: item.quantity - 1 }
-          : item
+          : item,
       );
     }
 
@@ -64,7 +64,7 @@ const CartPage = () => {
 
   const handleRemove = (productId: number, size?: string) => {
     const updatedItems = cartItems.filter(
-      (item) => !(item.productId === productId && item.size === size)
+      (item) => !(item.productId === productId && item.size === size),
     );
 
     setCartItems(updatedItems);
@@ -74,12 +74,13 @@ const CartPage = () => {
 
   const totalItems = useMemo(
     () => cartItems.reduce((total, item) => total + item.quantity, 0),
-    [cartItems]
+    [cartItems],
   );
 
   const totalPrice = useMemo(
-    () => cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
-    [cartItems]
+    () =>
+      cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
+    [cartItems],
   );
 
   if (cartItems.length === 0) {
@@ -173,17 +174,17 @@ const CartPage = () => {
                       </button>
                     </div>
 
-                 <div className="text-right">
-  <p className="text-[22px] font-bold">
-    {(item.price * item.quantity).toLocaleString()} TK
-  </p>
+                    <div className="text-right">
+                      <p className="text-[22px] font-bold">
+                        {(item.price * item.quantity).toLocaleString()} TK
+                      </p>
 
-  {item.quantity > 1 && (
-    <p className="text-sm text-gray-600">
-      {item.price.toLocaleString()} TK each
-    </p>
-  )}
-</div>
+                      {item.quantity > 1 && (
+                        <p className="text-sm text-gray-600">
+                          {item.price.toLocaleString()} TK each
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
