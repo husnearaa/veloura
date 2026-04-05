@@ -159,7 +159,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="text-sm text-gray-800 hover:text-gray-600 transition-colors uppercase"
+                className="text-sm text-gray-800 hover:text-gray-600 transition-colors uppercase mt-2"
               >
                 Login
               </Link>
