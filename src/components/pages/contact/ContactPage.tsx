@@ -51,7 +51,7 @@ const ContactPage = () => {
             Contact Us
           </p>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-black leading-tight">
-            Let’s get in touch
+            Let&apos;s get in touch
           </h1>
           <p className="mt-4 text-gray-600 text-sm sm:text-base leading-7">
             Have a question, feedback, or need help with an order? Fill out the
