@@ -1,6 +1,7 @@
 export type DemoCartItem = {
   productId: number;
   name: string;
+  category: string;
   price: number;
   image: string;
   size?: string;
@@ -32,7 +33,7 @@ export const addDemoCartItem = (item: DemoCartItem) => {
   const existingIndex = cartItems.findIndex(
     (cartItem) =>
       cartItem.productId === item.productId &&
-      cartItem.size === item.size
+      (cartItem.size || "") === (item.size || "")
   );
 
   if (existingIndex !== -1) {

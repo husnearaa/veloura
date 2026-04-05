@@ -241,7 +241,7 @@ export default function Navbar() {
               )}
             </div>
 
-            <Link href="/checkout" className="relative inline-flex">
+            <Link href="/cart" className="relative inline-flex">
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 z-20 flex h-5 min-w-5 items-center justify-center rounded-full bg-black px-1 text-[10px] font-semibold leading-none text-white">
                   {cartCount > 99 ? "99+" : cartCount}

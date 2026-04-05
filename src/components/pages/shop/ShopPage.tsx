@@ -299,9 +299,9 @@ export default function ShopPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState(true);
-  const [tempSelectedCategories, setTempSelectedCategories] = useState<string[]>(
-    []
-  );
+  const [tempSelectedCategories, setTempSelectedCategories] = useState<
+    string[]
+  >([]);
 
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedSize, setSelectedSize] = useState<string>("");
@@ -311,7 +311,9 @@ export default function ShopPage() {
     const categoryFromUrl = searchParams.get("categories");
 
     if (categoryFromUrl) {
-      const formattedCategory = categoryFromUrl.replace(/-/g, " ").toLowerCase();
+      const formattedCategory = categoryFromUrl
+        .replace(/-/g, " ")
+        .toLowerCase();
 
       if (categories.includes(formattedCategory)) {
         setSelectedCategories([formattedCategory]);
@@ -339,7 +341,7 @@ export default function ShopPage() {
     setSelectedCategories((prev) =>
       prev.includes(category)
         ? prev.filter((item) => item !== category)
-        : [...prev, category]
+        : [...prev, category],
     );
   };
 
@@ -347,7 +349,7 @@ export default function ShopPage() {
     setTempSelectedCategories((prev) =>
       prev.includes(category)
         ? prev.filter((item) => item !== category)
-        : [...prev, category]
+        : [...prev, category],
     );
   };
 
@@ -390,6 +392,7 @@ export default function ShopPage() {
     addDemoCartItem({
       productId: selectedProduct.id,
       name: selectedProduct.name,
+      category: selectedProduct.category,
       price: selectedProduct.price,
       image: getImageSrc(selectedProduct.image),
       size: selectedSize,
@@ -405,6 +408,7 @@ export default function ShopPage() {
     addDemoCartItem({
       productId: selectedProduct.id,
       name: selectedProduct.name,
+      category: selectedProduct.category,
       price: selectedProduct.price,
       image: getImageSrc(selectedProduct.image),
       size: selectedSize,
@@ -423,7 +427,7 @@ export default function ShopPage() {
         selectedCategories.length === 0 ||
         selectedCategories.some(
           (category) =>
-            product.category.toLowerCase() === category.toLowerCase()
+            product.category.toLowerCase() === category.toLowerCase(),
         );
 
       const isNumberSearch = !isNaN(Number(normalizedSearch));
@@ -530,7 +534,7 @@ export default function ShopPage() {
                                 <input
                                   type="checkbox"
                                   checked={tempSelectedCategories.includes(
-                                    category
+                                    category,
                                   )}
                                   onChange={() =>
                                     handleTempCategoryChange(category)
