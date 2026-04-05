@@ -94,6 +94,7 @@ export default function Navbar() {
             >
               HOME
             </Link>
+
             {/* Shop Dropdown */}
             <div className="relative group">
               <button
@@ -125,6 +126,14 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
+
+            {/* ✅ CONTACT PAGE */}
+            <Link
+              href="/contact"
+              className="text-gray-800 hover:text-gray-600 px-3 py-2 text-sm font-medium tracking-wide transition-colors duration-200 uppercase"
+            >
+              CONTACT
+            </Link>
           </div>
 
           {/* RIGHT SECTION - Desktop */}
@@ -150,7 +159,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="text-sm text-gray-800 hover:text-gray-600 transition-colors"
+                className="text-sm text-gray-800 hover:text-gray-600 transition-colors uppercase"
               >
                 Login
               </Link>
@@ -263,6 +272,13 @@ export default function Navbar() {
             >
               HOME
             </Link>
+            <Link
+              href="/contact"
+              className="text-gray-800 hover:text-gray-600 block px-3 py-2 text-base font-medium tracking-wide transition-colors duration-200 uppercase"
+              onClick={toggleMobileMenu}
+            >
+              CONTACT
+            </Link>
 
             {/* Mobile Shop Accordion */}
             <div>
@@ -332,7 +348,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="text-gray-800 hover:text-gray-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
+                className="text-gray-800 hover:text-gray-600 block px-3 py-2 text-base font-medium transition-colors duration-200 uppercase"
                 onClick={toggleMobileMenu}
               >
                 Login
