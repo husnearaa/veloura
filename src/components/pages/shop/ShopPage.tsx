@@ -15,6 +15,7 @@ import {
   ShoppingBag,
   Zap,
 } from "lucide-react";
+import { addDemoCartItem } from "@/lib/demo-cart";
 
 import ThreeImg1 from "@/assets/shop/three1.jpg";
 import ThreeImg2 from "@/assets/shop/three2.jpg";
@@ -379,12 +380,39 @@ export default function ShopPage() {
     setQuantity(1);
   };
 
-  const handleCheckout = () => {
+  const getImageSrc = (image: string | StaticImageData) => {
+    return typeof image === "string" ? image : image.src;
+  };
+
+  const handleAddToCart = () => {
     if (!selectedProduct || !selectedSize) return;
 
-    router.push(
-      `/checkout?productId=${selectedProduct.id}&size=${selectedSize}&qty=${quantity}`
-    );
+    addDemoCartItem({
+      productId: selectedProduct.id,
+      name: selectedProduct.name,
+      price: selectedProduct.price,
+      image: getImageSrc(selectedProduct.image),
+      size: selectedSize,
+      quantity,
+    });
+
+    closeProductDialog();
+  };
+
+  const handleBuyNow = () => {
+    if (!selectedProduct || !selectedSize) return;
+
+    addDemoCartItem({
+      productId: selectedProduct.id,
+      name: selectedProduct.name,
+      price: selectedProduct.price,
+      image: getImageSrc(selectedProduct.image),
+      size: selectedSize,
+      quantity,
+    });
+
+    closeProductDialog();
+    router.push("/checkout");
   };
 
   const filteredProducts = useMemo(() => {
@@ -671,10 +699,7 @@ export default function ShopPage() {
 
       {selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div
-            className="absolute inset-0"
-            onClick={closeProductDialog}
-          />
+          <div className="absolute inset-0" onClick={closeProductDialog} />
 
           <div className="relative z-10 w-full max-w-lg overflow-hidden rounded-[24px] bg-white shadow-2xl">
             <div className="flex items-center justify-between border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white p-5">
@@ -786,7 +811,7 @@ export default function ShopPage() {
 
               <div className="flex gap-3 pt-4">
                 <button
-                  onClick={handleCheckout}
+                  onClick={handleAddToCart}
                   disabled={!selectedSize}
                   className={`flex-1 rounded-lg py-3 font-medium flex items-center justify-center gap-2 transition-colors duration-200 ${
                     selectedSize
@@ -799,7 +824,7 @@ export default function ShopPage() {
                 </button>
 
                 <button
-                  onClick={handleCheckout}
+                  onClick={handleBuyNow}
                   disabled={!selectedSize}
                   className={`rounded-lg px-6 py-3 font-medium flex items-center gap-2 transition-colors duration-200 ${
                     selectedSize

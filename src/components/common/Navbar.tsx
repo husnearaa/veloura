@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Handbag, ChevronDown, Menu, X, Globe } from "lucide-react";
+import { getDemoCartCount } from "@/lib/demo-cart";
 
 interface UserData {
   email: string;
@@ -18,12 +19,24 @@ export default function Navbar() {
   const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [user, setUser] = useState<UserData | null>(null);
+  const [cartCount, setCartCount] = useState(0);
   const router = useRouter();
 
-  // Load user
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) setUser(JSON.parse(storedUser));
+
+    const updateCartCount = () => {
+      setCartCount(getDemoCartCount());
+    };
+
+    updateCartCount();
+
+    window.addEventListener("cartUpdated", updateCartCount);
+
+    return () => {
+      window.removeEventListener("cartUpdated", updateCartCount);
+    };
   }, []);
 
   const handleLogout = () => {
@@ -71,22 +84,12 @@ export default function Navbar() {
     <nav className="bg-white py-6 sticky top-0 z-50">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* LOGO */}
           <Link href="/" className="flex-shrink-0">
-            {/* <Image
-              src="https://server.vlada.store/assets/logos/logo-colored.png"
-              alt="Logo"
-              width={120}
-              height={40}
-              className="w-[100px] h-auto"
-              priority
-            /> */}
             <h1 className="text-xl font-bold uppercase text-gray-800 hover:text-gray-600 transition-colors">
               Veloura
             </h1>
           </Link>
 
-          {/* DESKTOP NAVIGATION */}
           <div className="hidden md:flex md:items-center md:space-x-8">
             <Link
               href="/"
@@ -95,7 +98,6 @@ export default function Navbar() {
               HOME
             </Link>
 
-            {/* Shop Dropdown */}
             <div className="relative group">
               <button
                 className="text-gray-800 hover:text-gray-600 px-3 py-2 text-sm font-medium tracking-wide transition-colors duration-200 uppercase flex items-center gap-1"
@@ -127,7 +129,6 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* ✅ CONTACT PAGE */}
             <Link
               href="/contact"
               className="text-gray-800 hover:text-gray-600 px-3 py-2 text-sm font-medium tracking-wide transition-colors duration-200 uppercase"
@@ -136,7 +137,6 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* RIGHT SECTION - Desktop */}
           <div className="hidden md:flex items-center space-x-6">
             {user ? (
               <div className="flex items-center space-x-4">
@@ -165,7 +165,6 @@ export default function Navbar() {
               </Link>
             )}
 
-            {/* Language Dropdown - Beside cart icon */}
             <div className="relative">
               <button
                 onClick={toggleLanguageDropdown}
@@ -184,7 +183,6 @@ export default function Navbar() {
                       <button
                         key={language.code}
                         onClick={() => {
-                          // Handle language change here
                           console.log(`Language changed to: ${language.code}`);
                           setIsLanguageDropdownOpen(false);
                         }}
@@ -199,14 +197,17 @@ export default function Navbar() {
               )}
             </div>
 
-            <Link href="/cart" className="relative">
+            <Link href="/cart" className="relative inline-flex">
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 z-20 flex h-5 min-w-5 items-center justify-center rounded-full bg-black px-1 text-[10px] font-semibold leading-none text-white">
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              )}
               <Handbag className="h-6 w-6 text-gray-800 hover:text-gray-600 transition-colors" />
             </Link>
           </div>
 
-          {/* MOBILE MENU BUTTONS */}
           <div className="md:hidden flex items-center space-x-4">
-            {/* Language icon for mobile */}
             <div className="relative">
               <button
                 onClick={toggleLanguageDropdown}
@@ -215,6 +216,7 @@ export default function Navbar() {
               >
                 <Globe className="h-6 w-6" />
               </button>
+
               {isLanguageDropdownOpen && (
                 <div
                   className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition-all duration-300 z-50"
@@ -225,7 +227,6 @@ export default function Navbar() {
                       <button
                         key={language.code}
                         onClick={() => {
-                          // Handle language change here
                           console.log(`Language changed to: ${language.code}`);
                           setIsLanguageDropdownOpen(false);
                         }}
@@ -239,9 +240,16 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            <Link href="/cart" className="relative">
+
+            <Link href="/checkout" className="relative inline-flex">
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 z-20 flex h-5 min-w-5 items-center justify-center rounded-full bg-black px-1 text-[10px] font-semibold leading-none text-white">
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              )}
               <Handbag className="h-6 w-6 text-gray-800" />
             </Link>
+
             <button
               onClick={toggleMobileMenu}
               className="text-gray-800 focus:outline-none"
@@ -256,7 +264,6 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* MOBILE MENU */}
         <div
           className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
             isMobileMenuOpen
@@ -272,6 +279,7 @@ export default function Navbar() {
             >
               HOME
             </Link>
+
             <Link
               href="/contact"
               className="text-gray-800 hover:text-gray-600 block px-3 py-2 text-base font-medium tracking-wide transition-colors duration-200 uppercase"
@@ -280,7 +288,6 @@ export default function Navbar() {
               CONTACT
             </Link>
 
-            {/* Mobile Shop Accordion */}
             <div>
               <button
                 onClick={toggleShopDropdown}
@@ -319,8 +326,6 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Mobile Language Section - Removed from here */}
-            {/* Auth Section - Only login/logout now */}
             {user ? (
               <div className="space-y-2 pt-2">
                 <div className="px-3 py-2 text-sm text-gray-600">
@@ -355,7 +360,6 @@ export default function Navbar() {
               </Link>
             )}
 
-            {/* Mobile CTA Button */}
             <div className="pt-4 pb-2">
               <Link
                 href="/shop"
