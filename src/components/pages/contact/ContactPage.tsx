@@ -68,7 +68,7 @@ const ContactPage = () => {
               </p>
 
               <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-4 leading-tight">
-                We’d love to hear from you
+                We&apos;d love to hear from you
               </h2>
 
               <p className="text-gray-600 leading-7 mb-8 text-sm sm:text-base">
@@ -118,7 +118,7 @@ const ContactPage = () => {
 
               <div className="mt-8 rounded-2xl border border-black/10 bg-white p-5">
                 <p className="text-sm text-gray-600 leading-7">
-                  We usually reply within{" "}
+                  We usually reply within
                   <span className="font-semibold text-black">24 hours</span>.
                   Please make sure your email address is correct so we can get
                   back to you.
