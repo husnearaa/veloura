@@ -9,7 +9,7 @@ const AboutVeloura = () => {
           Fashion that feels as good as it looks
         </span>
         <p className="text-lg text-primary font-inter md:text-[28.594px] leading-7 md:leading-[41.25px] text-center">
-          Welcome to Vlada - Your Fashion Destination
+          Welcome to Veloura - Your Fashion Destination
         </p>{" "}
         <p className="text-lg text-primary font-inter md:text-[28.594px] leading-7 md:leading-[41.25px] text-center">
           We create unique designer collections for women who love trendy
