@@ -63,7 +63,19 @@ const CheckoutPage = () => {
   const [isBillingSummaryOpen, setIsBillingSummaryOpen] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const agreeToPrivacy = watch("agreeToPrivacy");
+  const formValues = watch();
+
+  const isFormValid =
+    !!formValues.fullname?.trim() &&
+    !!formValues.email?.trim() &&
+    !!formValues.phone?.trim() &&
+    !!formValues.district?.trim() &&
+    !!formValues.area?.trim() &&
+    !!formValues.address?.trim() &&
+    !!formValues.agreeToPrivacy;
+
+  const coupon = watch("coupon");
+  const isCouponValid = !!coupon;
 
   const onSubmit = async (data: FormValues) => {
     try {
@@ -355,24 +367,31 @@ const CheckoutPage = () => {
                   }`}
                 >
                   <div className="p-5">
-                    <div className="relative w-full">
+                    <div className="relative w-full mt-2">
                       <label
                         htmlFor="coupon"
-                        className="absolute left-2 bg-white px-2 pointer-events-none transition-all duration-200 ease-in-out top-3 text-base text-gray-500"
+                        className="absolute left-3 -top-[10px] bg-white px-2 text-[14px] leading-5 text-[#245bff]"
                       >
                         Coupon
                       </label>
+
                       <input
                         id="coupon"
                         type="text"
-                        placeholder=""
+                        placeholder="coupon"
                         {...register("coupon")}
-                        className="w-full border outline-none py-3 px-[14px] rounded text-base text-[#4F4F4F] font-inter transition-all duration-200 border-[#B2BCCA]"
+                        className="w-full h-[48px] rounded-[4px] border border-[#cfd6df] px-4 text-[16px] text-[#4b5563] outline-none placeholder:text-[#9ca3af]"
                       />
                     </div>
+
                     <button
                       type="button"
-                      className="w-full text-center rounded-full p-2.5 cursor-pointer text-white bg-black/40 mt-4 font-openSans font-bold"
+                      disabled={!isCouponValid}
+                      className={`w-full text-center rounded-full p-2.5 mt-4 font-openSans font-bold text-white ${
+                        isCouponValid
+                          ? "bg-black cursor-pointer"
+                          : "bg-black/40 cursor-not-allowed"
+                      }`}
                     >
                       Apply
                     </button>
@@ -402,12 +421,18 @@ const CheckoutPage = () => {
                 <div className="p-5">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-[16px] text-[#374151]">Subtotal</span>
-                      <span className="text-[16px] text-[#374151]">7040 TK</span>
+                      <span className="text-[16px] text-[#374151]">
+                        Subtotal
+                      </span>
+                      <span className="text-[16px] text-[#374151]">
+                        7040 TK
+                      </span>
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <span className="text-[16px] text-[#374151]">Shipping</span>
+                      <span className="text-[16px] text-[#374151]">
+                        Shipping
+                      </span>
                       <span className="text-[16px] text-[#374151]">+70 TK</span>
                     </div>
                   </div>
@@ -453,8 +478,12 @@ const CheckoutPage = () => {
 
                   <button
                     type="submit"
-                    disabled={!agreeToPrivacy || isSubmitting}
-                    className="mt-4 w-full rounded-full bg-[#9f9f9f] py-[10px] text-center text-white text-[16px] font-bold cursor-not-allowed"
+                    disabled={!isFormValid || isSubmitting}
+                    className={`mt-4 w-full rounded-full py-[10px] text-center text-white text-[16px] font-bold ${
+                      !isFormValid || isSubmitting
+                        ? "bg-[#9f9f9f] cursor-not-allowed"
+                        : "bg-black cursor-pointer"
+                    }`}
                   >
                     {isSubmitting ? "Processing..." : "Pay 7110 TK"}
                   </button>
